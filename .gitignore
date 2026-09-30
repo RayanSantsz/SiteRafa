@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .tanstack/
+.output/
 assets/
 src/assets/
 *.log

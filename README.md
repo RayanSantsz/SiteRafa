@@ -30,6 +30,10 @@ npm run build:site
 
 `build:site` gera a versão com base `/rafaela-silva-consultoria4/`. Os arquivos estáticos ficam em `dist/client/` para publicação no mesmo caminho do site atual.
 
+## Vercel
+
+O projeto usa a integração oficial Nitro + TanStack Start. Na Vercel, importe o repositório com a raiz na pasta do projeto e mantenha o framework detectado como `TanStack Start`. O arquivo `vercel.json` já declara essa configuração; o comando padrão de build é `npm run build`.
+
 ## Formulário
 
 O formulário preserva os campos atuais, valida os dados no navegador, aplica máscara de WhatsApp e prepara a mensagem para o número comercial existente. A pessoa conclui o envio dentro do WhatsApp; nenhum lead é enviado para um backend novo.
