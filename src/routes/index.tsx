@@ -43,6 +43,35 @@ function Home() {
   }, [])
 
   useEffect(() => {
+    const handleAnchorNavigation = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
+      if (!link || link.target === '_blank') return
+
+      const targetId = decodeURIComponent(link.hash.slice(1))
+      const target = document.getElementById(targetId)
+      if (!target) return
+
+      event.preventDefault()
+      setMenuOpen(false)
+      if (window.location.hash !== link.hash) window.history.pushState(null, '', link.hash)
+
+      // Wait for the mobile menu to close before measuring the fixed header.
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          const headerHeight = document.querySelector<HTMLElement>('.site-header')?.getBoundingClientRect().height ?? 0
+          const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 18
+          const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion ? 'auto' : 'smooth' })
+        })
+      })
+    }
+
+    document.addEventListener('click', handleAnchorNavigation)
+    return () => document.removeEventListener('click', handleAnchorNavigation)
+  }, [])
+
+  useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const nodes = document.querySelectorAll<HTMLElement>('[data-reveal]')
     const observer = new IntersectionObserver((entries) => {
@@ -162,7 +191,7 @@ function Home() {
         <section className="segments-section section-pad" id="segmentos" aria-labelledby="segments-title">
           <div className="container-wide segments-layout">
             <div data-reveal><p className="section-kicker">PARA QUEM É</p><h2 id="segments-title">Para quem cresceu e precisa enxergar o financeiro com nitidez.</h2><p>Atendemos pequenas e médias empresas que querem sair do improviso e ganhar previsibilidade para a próxima fase.</p></div>
-            <ul className="segments-list" data-reveal>{segments.map((segment) => <li key={segment}><span>{segment}</span><ChevronRight size={19} aria-hidden="true" /></li>)}</ul>
+            <ul className="segments-list" data-reveal>{segments.map((segment) => <li key={segment}><a href="#diagnostico" aria-label={`Mais informações para ${segment}`}><span>{segment}</span><ChevronRight size={19} aria-hidden="true" /></a></li>)}</ul>
           </div>
         </section>
 
