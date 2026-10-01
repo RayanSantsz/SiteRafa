@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { ArrowRight, ArrowUpRight, Check, ChevronRight, Menu, ShieldCheck, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Check, ChevronRight, Clock3, Gauge, Menu, ShieldCheck, X } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion'
 import { ContactForm } from '../components/ContactForm'
 import { OutcomeCharts } from '../components/OutcomeCharts'
@@ -167,6 +167,21 @@ export function Home() {
 
         <OutcomeCharts />
 
+        <section className="clinic-owner-section section-pad" id="clinicas" aria-labelledby="clinic-owner-title">
+          <div className="container-wide">
+            <div className="clinic-owner-heading" data-reveal>
+              <div><p className="section-kicker">PARA CLÍNICAS E CONSULTÓRIOS</p><h2 id="clinic-owner-title">Antes de contratar, <em>veja onde o dinheiro está escapando.</em></h2></div>
+              <p>Uma conversa financeira precisa responder três perguntas: quanto entra, quanto fica e qual decisão aumenta sua margem.</p>
+            </div>
+            <div className="clinic-value-grid">
+              <article className="clinic-value-card" data-reveal><span>01 / MARGEM</span><Gauge size={22} aria-hidden="true" /><h3>Descobrir o resultado por procedimento</h3><p>Separar receita, repasse, custo direto e despesa fixa para você parar de confundir faturamento com lucro.</p></article>
+              <article className="clinic-value-card" data-reveal><span>02 / CAIXA</span><ShieldCheck size={22} aria-hidden="true" /><h3>Proteger o dinheiro sem perder o controle</h3><p>Organização, conferência e relatórios com a aprovação final sempre nas mãos da clínica.</p></article>
+              <article className="clinic-value-card" data-reveal><span>03 / DECISÃO</span><Clock3 size={22} aria-hidden="true" /><h3>Agir antes que a margem desapareça</h3><p>Acompanhamento frequente para identificar custos, negociações e oportunidades enquanto ainda há tempo de corrigir.</p></article>
+            </div>
+            <div className="clinic-owner-trust" data-reveal><span><ShieldCheck size={17} aria-hidden="true" /> Sem acesso bancário para transferências</span><span><Gauge size={17} aria-hidden="true" /> Cenário financeiro antes da proposta</span><span><Clock3 size={17} aria-hidden="true" /> Diagnóstico inicial sem compromisso</span><a className="text-link" href="#diagnostico">Simular meu cenário <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+          </div>
+        </section>
+
         <section className="method-section section-pad" id="metodo" aria-labelledby="method-title">
           <div className="container-wide">
             <div className="section-heading method-heading" data-reveal><p className="section-kicker">COMO COMEÇA</p><h2 id="method-title">Um caminho claro, do primeiro contato à operação rodando.</h2><p>Primeiro entendemos a realidade da sua empresa. Depois implantamos processos que fazem sentido para ela.</p></div>
@@ -207,7 +222,7 @@ export function Home() {
         </section>
 
         <section className="diagnostic-section section-pad" id="diagnostico" aria-labelledby="diagnostic-title">
-          <div className="container-wide diagnostic-layout"><div className="diagnostic-copy" data-reveal><p className="section-kicker section-kicker-light">PRIMEIRO PASSO</p><h2 id="diagnostic-title">Antes de propor, <em>entendemos.</em></h2><p>Em uma conversa prática, avaliamos seu volume de movimentações, sua rotina de cobranças e os principais gargalos financeiros.</p><ul><li><Check size={18} aria-hidden="true" /> Avaliação inicial gratuita</li><li><Check size={18} aria-hidden="true" /> Sem compromisso</li><li><Check size={18} aria-hidden="true" /> Retorno em até 1 dia útil</li></ul><a className="diagnostic-whatsapp" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Prefere conversar direto? Chame no WhatsApp <ArrowUpRight size={18} aria-hidden="true" /></a></div><div data-reveal><ContactForm /></div></div>
+          <div className="container-wide diagnostic-layout"><div className="diagnostic-copy" data-reveal><p className="section-kicker section-kicker-light">PRIMEIRO PASSO</p><h2 id="diagnostic-title">Antes de propor, <em>entendemos.</em></h2><p>Em uma conversa prática, avaliamos volume, custos, recebimentos e os gargalos que podem estar pressionando a margem da sua clínica.</p><ul><li><Check size={18} aria-hidden="true" /> Diagnóstico inicial sem compromisso</li><li><Check size={18} aria-hidden="true" /> Cenário financeiro antes da proposta</li><li><Check size={18} aria-hidden="true" /> Você continua aprovando os pagamentos</li></ul><a className="diagnostic-whatsapp" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Prefere conversar direto? Chame no WhatsApp <ArrowUpRight size={18} aria-hidden="true" /></a></div><div data-reveal><ContactForm /></div></div>
         </section>
 
         <section className="faq-section section-pad" id="duvidas" aria-labelledby="faq-title">

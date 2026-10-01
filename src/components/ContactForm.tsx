@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
+import { ArrowUpRight, CheckCircle2, Clock3, ShieldCheck } from 'lucide-react'
 import { whatsappUrl } from '../lib/content'
 
 type FieldName = 'nome' | 'telefone' | 'email' | 'empresa' | 'segmento' | 'faturamento' | 'consentimento'
@@ -100,8 +100,9 @@ export function ContactForm() {
     <form ref={formRef} className="lead-form" onSubmit={submit} noValidate aria-label="Solicitar diagnóstico financeiro">
       <div className="form-heading">
         <span className="section-kicker">PRIMEIRO PASSO</span>
-        <h3>Vamos entender seu financeiro.</h3>
-        <p>Conte um pouco sobre sua empresa. O próximo passo acontece no WhatsApp.</p>
+        <h3>Vamos entender onde sua operação perde margem.</h3>
+        <p>Conte um pouco sobre sua empresa. Você recebe uma leitura inicial antes de decidir qualquer contratação.</p>
+        <div className="form-reassurance"><span><ShieldCheck size={15} aria-hidden="true" /> Sem acesso bancário</span><span><Clock3 size={15} aria-hidden="true" /> Retorno em até 1 dia útil</span></div>
       </div>
       <div className="form-grid">
         <label className="field" htmlFor="nome"><span>Seu nome *</span><input id="nome" name="nome" autoComplete="name" placeholder="Como podemos chamar você?" aria-invalid={!!errors.nome} aria-describedby="nome-erro" /><FieldError id="nome" error={errors.nome} /></label>

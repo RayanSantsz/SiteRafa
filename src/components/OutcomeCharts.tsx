@@ -1,10 +1,11 @@
-import { ArrowDownRight, ArrowUpRight, BarChart3 } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowDownRight, ArrowUpRight, BarChart3, CheckCircle2, Target } from 'lucide-react'
 
 const herculesMonthly = [
   { month: 'Jan', y2025: 88_000, y2026: 315_000 },
   { month: 'Fev', y2025: 220_000, y2026: 317_000 },
   { month: 'Mar', y2025: 234_000, y2026: 667_000 },
-  { month: 'Abr', y2025: 249_000, y2026: 557_516 },
+  { month: 'Abr', y2025: 249_000, y2026: 577_516 },
   { month: 'Mai', y2025: 126_000, y2026: 602_520 },
   { month: 'Jun', y2025: 163_000, y2026: 246_100 },
   { month: 'Jul', y2025: 84_000, y2026: 971_430 },
@@ -12,6 +13,10 @@ const herculesMonthly = [
 ] as const
 
 const herculesReportedTotal2026 = 4_342_372
+const herculesMarginScenarios = [
+  { target: 20, revenue: 494_200, difference: 120_700, profit: 98_800 },
+  { target: 30, revenue: 550_200, difference: 176_700, profit: 165_100 },
+] as const
 const herculesCumulative = herculesMonthly.reduce<{ month: string; y2025: number; y2026: number }[]>((result, point, index) => {
   const previous = result[index - 1]
   result.push({
@@ -48,24 +53,72 @@ const chartX = (index: number) => chartLeft + chartSlot * index + chartSlot / 2
 const chartY = (value: number, max: number) => chartTop + chartPlotHeight - (value / max) * chartPlotHeight
 const makePath = (series: 'y2025' | 'y2026') => herculesCumulative.map((point, index) => `${index === 0 ? 'M' : 'L'} ${chartX(index)} ${chartY(point[series], cumulativeMax)}`).join(' ')
 
+function HerculesMarginSimulator() {
+  const [target, setTarget] = useState<20 | 30>(20)
+  const scenario = herculesMarginScenarios.find((item) => item.target === target) ?? herculesMarginScenarios[0]
+
+  return (
+    <div className="hercules-simulator">
+      <div className="hercules-simulator-head">
+        <div>
+          <span className="hercules-subkicker">SIMULAÇÃO DE MARGEM · AGO/26</span>
+          <h4>Quanto a operação precisa faturar para voltar a respirar?</h4>
+          <p>Base real do mês: R$ 373,5 mil de receita, R$ 241,6 mil em custos variáveis e R$ 85,9 mil em despesas fixas.</p>
+        </div>
+        <div className="hercules-target-toggle" role="group" aria-label="Escolha a margem operacional desejada">
+          {herculesMarginScenarios.map((item) => <button key={item.target} type="button" aria-pressed={target === item.target} className={target === item.target ? 'is-active' : ''} onClick={() => setTarget(item.target)}>{item.target}% de margem</button>)}
+        </div>
+      </div>
+      <div className="hercules-simulator-result">
+        <div><span>Receita atual</span><strong>R$ 373,5 mil</strong><small>margem de 6,7%</small></div>
+        <div className="hercules-simulator-arrow" aria-hidden="true">→</div>
+        <div className="is-highlight"><span>Receita necessária</span><strong>R$ {scenario.revenue.toLocaleString('pt-BR')}</strong><small>para {scenario.target}% de margem</small></div>
+        <div className="hercules-simulator-delta"><strong>+ R$ {scenario.difference.toLocaleString('pt-BR')}</strong><span>de receita incremental</span><small>lucro operacional projetado: R$ {scenario.profit.toLocaleString('pt-BR')}</small></div>
+      </div>
+    </div>
+  )
+}
+
 function HerculesCaseStudy() {
   return (
     <div className="hercules-case" data-reveal>
       <div className="hercules-case-head">
         <div>
-          <p className="section-kicker section-kicker-light">CASE HÉRCULES · JAN–AGO</p>
-          <h3>Uma evolução que aparece nos números, <em>mês após mês.</em></h3>
+          <p className="section-kicker section-kicker-light">CASE HÉRCULES · CIRURGIA PLÁSTICA · JAN–AGO/26</p>
+          <h3>Mais vendas não bastam. <em>É preciso proteger a margem.</em></h3>
         </div>
-        <p>Comparativo reportado de janeiro a agosto de 2025 contra o mesmo período de 2026, com vendas, volume cirúrgico e ticket médio.</p>
+        <p>Um recorte real de gestão: crescimento comercial, leitura de custos e prioridades definidas para transformar faturamento em caixa.</p>
       </div>
 
       <div className="hercules-metrics" aria-label="Principais indicadores do case Hércules">
+        <div className="hercules-metric"><strong>+151,3%</strong><span>cirurgias fechadas</span><small>39 → 98 no acumulado</small></div>
         <div className="hercules-metric"><strong>+252%</strong><span>vendas acumuladas</span><small>R$ 1,233 mi → R$ 4,342 mi</small></div>
-        <div className="hercules-metric"><strong>+836%</strong><span>vendas em agosto</span><small>R$ 69 mil → R$ 645,8 mil</small></div>
-        <div className="hercules-metric"><strong>+300%</strong><span>cirurgias em agosto</span><small>3 → 12 procedimentos</small></div>
-        <div className="hercules-metric"><strong>+134%</strong><span>ticket médio em agosto</span><small>R$ 23 mil → R$ 53,8 mil</small></div>
-        <div className="hercules-metric"><strong>+252%</strong><span>média mensal</span><small>R$ 154,1 mil → R$ 542,8 mil</small></div>
+        <div className="hercules-metric"><strong>+40,2%</strong><span>ticket médio</span><small>R$ 31.615 → R$ 44.310</small></div>
+        <div className="hercules-metric"><strong>42,9%</strong><span>conversão em agosto</span><small>12 fechamentos de 28 orçamentos</small></div>
+        <div className="hercules-metric"><strong>+175,5%</strong><span>lucro operacional</span><small>R$ 1,094 mi · margem média 32,5%</small></div>
       </div>
+
+      <div className="hercules-insight-grid">
+        <article className="hercules-insight-card hercules-margin-card">
+          <div className="hercules-insight-heading"><span className="hercules-subkicker">ALERTA DE MARGEM</span><strong>O faturamento reagiu. A margem precisou de proteção.</strong></div>
+          <div className="hercules-margin-timeline" aria-label="Margem operacional de junho a agosto de 2026">
+            <div><span>Jun</span><strong>19,9%</strong><i className="is-positive" /></div>
+            <div><span>Jul</span><strong>-1,8%</strong><i className="is-negative" /></div>
+            <div><span>Ago</span><strong>6,7%</strong><i className="is-recovering" /></div>
+          </div>
+          <p>Em julho, a clínica teve prejuízo operacional de R$ 5,7 mil. Em agosto voltou ao positivo, mas ainda abaixo da margem média do período.</p>
+          <div className="hercules-insight-foot"><CheckCircle2 size={16} aria-hidden="true" /> A consultoria mostra onde o crescimento está virando resultado — e onde ainda não.</div>
+        </article>
+
+        <article className="hercules-insight-card hercules-funnel-card">
+          <div className="hercules-insight-heading"><span className="hercules-subkicker">FUNIL COMERCIAL · AGO/26</span><strong>28 orçamentos trabalhados. 12 cirurgias fechadas.</strong></div>
+          <div className="hercules-funnel"><div><strong>26</strong><span>primeiras consultas</span></div><div><strong>28</strong><span>orçamentos</span></div><div className="is-closed"><strong>12</strong><span>fechamentos</span></div></div>
+          <div className="hercules-funnel-rate"><strong>42,9%</strong><span>taxa de conversão sobre orçamentos</span></div>
+          <p>Outras 11 oportunidades seguiram em negociação. O próximo ganho pode estar no acompanhamento do funil, não apenas em gerar mais contatos.</p>
+        </article>
+      </div>
+
+      <HerculesMarginSimulator />
 
       <div className="hercules-chart-grid">
         <figure className="hercules-chart-card">
@@ -93,6 +146,16 @@ function HerculesCaseStudy() {
           </svg>
           <div className="hercules-legend"><span><i />2025 · {formatCurrency(herculesCumulative[herculesCumulative.length - 1].y2025)}</span><span><i className="is-2026" />2026 · {formatCurrency(herculesReportedTotal2026)} informado</span></div>
         </figure>
+      </div>
+
+      <div className="hercules-priorities">
+        <div><span className="hercules-subkicker">PRÓXIMOS PASSOS DEFINIDOS</span><strong>O relatório termina com decisão, não só com gráfico.</strong></div>
+        <ul>
+          <li><Target size={16} aria-hidden="true" /> Recuperar a margem operacional para 20%.</li>
+          <li><Target size={16} aria-hidden="true" /> Sustentar vendas acima da meta máxima.</li>
+          <li><Target size={16} aria-hidden="true" /> Controlar custos variáveis, pessoal e marketing.</li>
+          <li><Target size={16} aria-hidden="true" /> Estruturar novas oportunidades de receita.</li>
+        </ul>
       </div>
 
     </div>

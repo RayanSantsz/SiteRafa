@@ -63,5 +63,7 @@ export const faqs = [
   { question: 'Quem aprova os pagamentos e movimenta o dinheiro?', answer: 'A decisão e a autorização final permanecem com você. Rafaela organiza, confere e agenda as operações com perfil de operador, sem permissão para autorizar transferências.' },
   { question: 'Meu financeiro está desorganizado. Posso contratar?', answer: 'Sim. O diagnóstico inicial ajuda a entender os problemas e a definir por onde começar a organização da rotina.' },
   { question: 'Qual é a diferença entre BPO e gestão estratégica?', answer: 'O BPO executa e organiza a rotina financeira. A gestão estratégica interpreta os números, acompanha indicadores e apoia decisões de crescimento.' },
-  { question: 'Quanto custa o serviço?', answer: 'A proposta é personalizada depois do diagnóstico, considerando o volume de movimentações, a complexidade da operação e o apoio necessário.' },
+  { question: 'Como vocês calculam se o trabalho vale a pena?', answer: 'Cruzamos receita, custos, volume de movimentações e gargalos da operação. A conversa mostra onde existe oportunidade e quais cenários fazem sentido antes de qualquer proposta.' },
+  { question: 'Quanto custa o serviço?', answer: 'A proposta é personalizada depois do diagnóstico, considerando o volume de movimentações, a complexidade da operação e o apoio necessário. Você conhece o escopo e o investimento antes de contratar.' },
+  { question: 'Posso começar com um projeto menor?', answer: 'Sim. O diagnóstico pode ser o primeiro passo para mapear a operação, definir prioridades e decidir se faz sentido avançar para a implantação ou para um acompanhamento contínuo.' },
 ] as const
