@@ -9,7 +9,11 @@ import { faqs, segments, services, steps, testimonials, whatsappUrl } from '../l
 const siteUrl = 'https://sites.clubedotemplate.com.br/rafaela-silva-consultoria4/'
 const heroImage = `${import.meta.env.BASE_URL}rafaela-hero.png`
 const portraitImage = `${import.meta.env.BASE_URL}rafaela-portrait.png`
-const directWhatsApp = whatsappUrl('Olá, Rafaela! Vim pelo site e gostaria de conversar sobre o financeiro da minha empresa.')
+const directWhatsApp = whatsappUrl('Olá, Rafaela! Vim pelo site e gostaria de solicitar um diagnóstico financeiro para minha empresa.')
+
+function WhatsAppMark({ size = 21 }: { size?: number }) {
+  return <svg className="whatsapp-mark" width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.25a9.75 9.75 0 0 0-8.4 14.7L2.3 21.7l4.9-1.28A9.75 9.75 0 1 0 12 2.25Z" stroke="currentColor" strokeWidth="1.7" /><path d="M8.45 7.55c.2-.22.43-.25.64-.1l1.1.84c.2.15.27.4.16.62l-.43.85c-.08.16-.07.34.03.49.47.7 1.1 1.33 1.81 1.8.15.1.33.1.49.03l.86-.43c.22-.11.47-.04.62.16l.84 1.1c.15.2.12.44-.1.64-.32.3-.78.66-1.27.68-.67.03-1.8-.55-2.9-1.65s-1.68-2.23-1.65-2.9c.02-.49.38-.95.68-1.27Z" fill="currentColor" /></svg>
+}
 
 export const Route = createFileRoute('/')({
   head: () => ({
@@ -109,9 +113,9 @@ export function Home() {
             <a href="#metodo" onClick={closeMenu}>Método</a>
             <a href="#sobre" onClick={closeMenu}>Sobre</a>
             <a href="#duvidas" onClick={closeMenu}>Dúvidas</a>
-            <a className="mobile-nav-cta" href="#diagnostico" onClick={closeMenu}>Solicitar diagnóstico <ArrowUpRight size={17} aria-hidden="true" /></a>
+            <a className="mobile-nav-cta" href={directWhatsApp} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Solicitar diagnóstico <ArrowUpRight size={17} aria-hidden="true" /></a>
           </nav>
-          <a className="header-cta" href="#diagnostico">Solicitar diagnóstico <ArrowUpRight size={17} aria-hidden="true" /></a>
+          <a className="header-cta" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Solicitar diagnóstico <ArrowUpRight size={17} aria-hidden="true" /></a>
           <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} aria-controls="menu-principal" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={25} /> : <Menu size={25} />}</button>
         </div>
       </header>
@@ -126,7 +130,7 @@ export function Home() {
               <h1 id="hero-title">Clareza financeira<br />para crescer com<br />segurança.</h1>
               <p className="hero-summary">Sua operação em ordem. Suas decisões com mais confiança.</p>
               <div className="hero-actions">
-                <a className="button button-copper" href="#diagnostico">Solicitar diagnóstico <ArrowUpRight size={19} aria-hidden="true" /></a>
+                <a className="button button-copper" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Solicitar diagnóstico <ArrowUpRight size={19} aria-hidden="true" /></a>
                 <a className="hero-secondary" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Falar no WhatsApp <ArrowRight size={17} aria-hidden="true" /></a>
               </div>
             </div>
@@ -146,7 +150,7 @@ export function Home() {
                   <span className="service-number">{service.number}</span>
                   <div><h3>{service.title}</h3><span className="service-detail">{service.detail}</span></div>
                   <p>{service.description}</p>
-                  <a href="#diagnostico" aria-label={`Solicitar diagnóstico para ${service.title}`}><ArrowUpRight size={23} strokeWidth={1.5} aria-hidden="true" /></a>
+                  <a href={directWhatsApp} target="_blank" rel="noopener noreferrer" aria-label={`Solicitar diagnóstico para ${service.title}`}><ArrowUpRight size={23} strokeWidth={1.5} aria-hidden="true" /></a>
                 </article>
               ))}
             </div>
@@ -156,7 +160,7 @@ export function Home() {
 
         <section className="benefits-section section-pad" id="beneficios" aria-labelledby="benefits-title">
           <div className="container-wide benefits-layout">
-            <div className="benefits-intro" data-reveal><p className="section-kicker section-kicker-light">POR QUE FAZ DIFERENÇA</p><h2 id="benefits-title">Menos urgência na rotina.<br /><em>Mais clareza na decisão.</em></h2><p>O BPO tira a operação da sua mesa e devolve uma visão confiável do que entra, sai e precisa de atenção.</p><a className="text-link light-link" href="#diagnostico">Entenda seu cenário <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+            <div className="benefits-intro" data-reveal><p className="section-kicker section-kicker-light">POR QUE FAZ DIFERENÇA</p><h2 id="benefits-title">Menos urgência na rotina.<br /><em>Mais clareza na decisão.</em></h2><p>O BPO tira a operação da sua mesa e devolve uma visão confiável do que entra, sai e precisa de atenção.</p><a className="text-link light-link" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Entenda seu cenário <ArrowUpRight size={18} aria-hidden="true" /></a></div>
             <div className="benefits-points" data-reveal>
               <div><span className="benefit-mark"><Check size={19} aria-hidden="true" /></span><h3>Rotina sob controle</h3><p>Contas, prazos e conciliação acompanhados com método.</p></div>
               <div><span className="benefit-mark"><Check size={19} aria-hidden="true" /></span><h3>Números que fazem sentido</h3><p>Fluxo de caixa, DRE e indicadores apresentados com clareza.</p></div>
@@ -178,7 +182,7 @@ export function Home() {
               <article className="clinic-value-card" data-reveal><span>02 / CAIXA</span><ShieldCheck size={22} aria-hidden="true" /><h3>Proteger o dinheiro sem perder o controle</h3><p>Organização, conferência e relatórios com a aprovação final sempre nas mãos da clínica.</p></article>
               <article className="clinic-value-card" data-reveal><span>03 / DECISÃO</span><Clock3 size={22} aria-hidden="true" /><h3>Agir antes que a margem desapareça</h3><p>Acompanhamento frequente para identificar custos, negociações e oportunidades enquanto ainda há tempo de corrigir.</p></article>
             </div>
-            <div className="clinic-owner-trust" data-reveal><span><ShieldCheck size={17} aria-hidden="true" /> Sem acesso bancário para transferências</span><span><Gauge size={17} aria-hidden="true" /> Cenário financeiro antes da proposta</span><span><Clock3 size={17} aria-hidden="true" /> Diagnóstico inicial sem compromisso</span><a className="text-link" href="#diagnostico">Simular meu cenário <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+            <div className="clinic-owner-trust" data-reveal><span><ShieldCheck size={17} aria-hidden="true" /> Sem acesso bancário para transferências</span><span><Gauge size={17} aria-hidden="true" /> Cenário financeiro antes da proposta</span><span><Clock3 size={17} aria-hidden="true" /> Diagnóstico inicial sem compromisso</span><a className="text-link" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Simular meu cenário <ArrowUpRight size={18} aria-hidden="true" /></a></div>
           </div>
         </section>
 
@@ -206,14 +210,14 @@ export function Home() {
         <section className="segments-section section-pad" id="segmentos" aria-labelledby="segments-title">
           <div className="container-wide segments-layout">
             <div data-reveal><p className="section-kicker">PARA QUEM É</p><h2 id="segments-title">Para quem cresceu e precisa enxergar o financeiro com nitidez.</h2><p>Atendemos pequenas e médias empresas que querem sair do improviso e ganhar previsibilidade para a próxima fase.</p></div>
-            <ul className="segments-list" data-reveal>{segments.map((segment) => <li key={segment}><a href="#diagnostico" aria-label={`Mais informações para ${segment}`}><span>{segment}</span><ChevronRight size={19} aria-hidden="true" /></a></li>)}</ul>
+            <ul className="segments-list" data-reveal>{segments.map((segment) => <li key={segment}><a href={directWhatsApp} target="_blank" rel="noopener noreferrer" aria-label={`Mais informações para ${segment}`}><span>{segment}</span><ChevronRight size={19} aria-hidden="true" /></a></li>)}</ul>
           </div>
         </section>
 
         <section className="about-section section-pad" id="sobre" aria-labelledby="about-title">
           <div className="container-wide about-layout">
             <div className="about-photo" data-reveal><img src={portraitImage} loading="lazy" alt="Retrato de Rafaela Almeida, consultora financeira" /><div className="about-photo-caption"><strong>Rafaela Almeida</strong><span>Consultora Financeira &amp; BPO</span></div></div>
-            <div className="about-copy" data-reveal><p className="section-kicker">QUEM ESTÁ À FRENTE</p><h2 id="about-title">Proximidade para cuidar da rotina. <em>Visão para apoiar suas decisões.</em></h2><p>Sou Rafaela Almeida, especialista em BPO Financeiro, Controladoria e Gestão Financeira Estratégica. Ajudo empresas a transformar rotinas desorganizadas em processos claros, previsíveis e acompanhados.</p><p>Acredito que nenhum empresário deve viver na incerteza do caixa. Com a operação estruturada e os números à vista, você ganha espaço para cuidar do que faz sua empresa crescer.</p><a className="text-link" href="#diagnostico">Converse comigo <ArrowUpRight size={19} aria-hidden="true" /></a></div>
+            <div className="about-copy" data-reveal><p className="section-kicker">QUEM ESTÁ À FRENTE</p><h2 id="about-title">Proximidade para cuidar da rotina. <em>Visão para apoiar suas decisões.</em></h2><p>Sou Rafaela Almeida, especialista em BPO Financeiro, Controladoria e Gestão Financeira Estratégica. Ajudo empresas a transformar rotinas desorganizadas em processos claros, previsíveis e acompanhados.</p><p>Acredito que nenhum empresário deve viver na incerteza do caixa. Com a operação estruturada e os números à vista, você ganha espaço para cuidar do que faz sua empresa crescer.</p><a className="text-link" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Converse comigo <ArrowUpRight size={19} aria-hidden="true" /></a></div>
           </div>
         </section>
 
@@ -229,11 +233,11 @@ export function Home() {
           <div className="container-wide faq-layout"><div className="faq-intro" data-reveal><p className="section-kicker">DÚVIDAS FREQUENTES</p><h2 id="faq-title">Tudo mais claro antes de começar.</h2><p>As respostas para as perguntas que mais surgem sobre BPO e gestão financeira.</p><a className="text-link" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Tenho outra dúvida <ArrowUpRight size={18} aria-hidden="true" /></a></div><Accordion type="single" collapsible className="faq-list" data-reveal>{faqs.map((faq, index) => <AccordionItem value={`faq-${index}`} key={faq.question}><AccordionTrigger>{faq.question}</AccordionTrigger><AccordionContent>{faq.answer}</AccordionContent></AccordionItem>)}</Accordion></div>
         </section>
 
-        <section className="closing-section" id="contato" aria-labelledby="closing-title"><div className="container-wide closing-inner" data-reveal><div><p className="section-kicker section-kicker-light">PRÓXIMO PASSO</p><h2 id="closing-title">Seu financeiro pode parar de depender do improviso.</h2></div><a className="button button-copper" href="#diagnostico">Solicitar diagnóstico <ArrowUpRight size={19} aria-hidden="true" /></a></div></section>
+        <section className="closing-section" id="contato" aria-labelledby="closing-title"><div className="container-wide closing-inner" data-reveal><div><p className="section-kicker section-kicker-light">PRÓXIMO PASSO</p><h2 id="closing-title">Seu financeiro pode parar de depender do improviso.</h2></div><a className="button button-copper" href={directWhatsApp} target="_blank" rel="noopener noreferrer">Solicitar diagnóstico <ArrowUpRight size={19} aria-hidden="true" /></a></div></section>
       </main>
 
       <footer className="site-footer"><div className="container-wide footer-grid"><div><a className="wordmark footer-wordmark" href="#inicio"><span>RAFAELA ALMEIDA</span><small>CONSULTORIA FINANCEIRA</small></a><p>BPO Financeiro e gestão estratégica para empresas que querem crescer com clareza.</p></div><div><h3>Contato</h3><a href="mailto:rafaelaalmeidasilva.gf@gmail.com">rafaelaalmeidasilva.gf@gmail.com</a><a href="tel:+5571981980556">(71) 98198-0556</a><p>Salvador, BA · Atendimento online em todo o Brasil</p></div><div><h3>Navegação</h3><a href="#servicos">Serviços</a><a href="#metodo">Método</a><a href="#sobre">Sobre Rafaela</a><a href="#duvidas">Dúvidas</a></div></div><div className="container-wide footer-bottom"><span>© {new Date().getFullYear()} Rafaela Almeida Consultoria Financeira.</span><span>Segunda a sexta, 08h às 18h</span></div></footer>
-      <a className="floating-whatsapp" href={directWhatsApp} target="_blank" rel="noopener noreferrer" aria-label="Falar com Rafaela Almeida no WhatsApp"><span>WhatsApp</span><ArrowUpRight size={20} aria-hidden="true" /></a>
+      <a className="floating-whatsapp" href={directWhatsApp} target="_blank" rel="noopener noreferrer" aria-label="Solicitar diagnóstico com Rafaela Almeida no WhatsApp"><span>WhatsApp</span><WhatsAppMark size={21} /></a>
     </>
   )
 }
