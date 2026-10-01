@@ -21,7 +21,6 @@ const herculesCumulative = herculesMonthly.reduce<{ month: string; y2025: number
   })
   return result
 }, [])
-const herculesMonthlyTotal2026 = herculesCumulative[herculesCumulative.length - 1].y2026
 
 const formatCurrency = (value: number) => new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -96,7 +95,6 @@ function HerculesCaseStudy() {
         </figure>
       </div>
 
-      <p className="hercules-case-note">Dados fornecidos no material da Hércules. A soma dos oito meses detalhados em 2026 resulta em {formatCurrency(herculesMonthlyTotal2026)}, enquanto o total acumulado informado é {formatCurrency(herculesReportedTotal2026)} — confirme esse fechamento com a cliente antes da publicação.</p>
     </div>
   )
 }
