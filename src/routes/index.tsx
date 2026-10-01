@@ -31,7 +31,7 @@ export const Route = createFileRoute('/')({
   component: Home,
 })
 
-function Home() {
+export function Home() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
