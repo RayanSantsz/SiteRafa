@@ -5,3 +5,6 @@ dist/
 assets/
 src/assets/
 *.log
+
+.vercel
+.env*
