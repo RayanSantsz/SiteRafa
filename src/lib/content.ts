@@ -42,18 +42,18 @@ export const segments = [
 export const testimonials = [
   {
     quote: 'Ter a Rafaela cuidando do financeiro da minha clínica foi um divisor de águas. Parei de perder horas com conciliação e hoje sei exatamente minha margem de lucro por procedimento.',
-    name: 'Dra. Camila Nogueira',
-    context: 'Clínica Integrada de Saúde',
+    name: 'Gestora de clínica',
+    context: 'Depoimento anonimizado',
   },
   {
     quote: 'Profissionalismo impecável. O controle de honorários e o fluxo de caixa do nosso escritório de advocacia ficaram 100% organizados e no prazo.',
-    name: 'Dr. Marcelo Ramos',
-    context: 'Ramos & Associados Advocacia',
+    name: 'Sócio de escritório',
+    context: 'Depoimento anonimizado',
   },
   {
     quote: 'A régua de cobrança e a gestão de contas a pagar reduziram nossa inadimplência em pouquíssimo tempo. Não abro mão dessa parceria.',
-    name: 'Juliana Vasconcelos',
-    context: 'Studio & Espaço de Beleza',
+    name: 'Empresária de beleza',
+    context: 'Depoimento anonimizado',
   },
 ] as const
 
